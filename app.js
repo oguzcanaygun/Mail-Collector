@@ -16,41 +16,52 @@ app.post("/", function(req, res) {
   const secondName= req.body.sName;
   const email= req.body.email;
 
-  let data = {
-    members: [{
-        email_adress: email,
-        status: "subscribed",
-        merge_fields: {
-          FNAME:firstName;
-          LNAME:lastName
-        }
+  const data = {
+  members:[{
+  email_address: email,
+    status: "subscribed",
+    merge_fields: {
+      FNAME : firstName,
+      LNAME : secondName  }
     }]
-  }
+  };
+
 const jsonData = JSON.stringify(data)
 
-  const url="https://us18.api.mailchimp.com/3.0/lists/aa066b4277."
+// lists/yourlistid     
+  const url="https://us18.api.mailchimp.com/3.0/lists/YOURLISTIDHERE"
 
+  // PLACE YOUR OWN API DOWN HERE
   const options = {
     method: "POST",
-    auth: "oguzcan:245cc0703fa5839b469e440d83a2de79-us18"
+    auth: "oguzcan:YOURAPIKEYHERE"
   }
 
 
 
   const request = https.request(url, options, function(response) {
+    if (response.statusCode === 200){
+      res.sendFile(__dirname+"/success.html");
+    } else{
+      res.sendFile(__dirname+"/failure.html");
+    }
+
     response.on("data", function(data){
       console.log(JSON.parse(data))
     })
   })
-  request.write(jsonData);
+  // request.write(jsonData);
   request.end();
 
 })
 
+app.post("/failure", function(req, res) {
+  res.sendFile(__dirname+"/signup.html");
+})
+
+
+
+
 app.listen(3000, function() {
   console.log("Server is up and running on port 3000.")
 })
-
-//API KEY 245cc0703fa5839b469e440d83a2de79-us18
-
-// LIST KEY aa066b4277.
