@@ -28,7 +28,7 @@ app.post("/", function(req, res) {
 
 const jsonData = JSON.stringify(data)
 
-// lists/yourlistid     
+// lists/yourlistid
   const url="https://us18.api.mailchimp.com/3.0/lists/YOURLISTIDHERE"
 
   // PLACE YOUR OWN API DOWN HERE
@@ -62,6 +62,6 @@ app.post("/failure", function(req, res) {
 
 
 
-app.listen(3000, function() {
+app.listen(process.env.PORT || 3000, function() {
   console.log("Server is up and running on port 3000.")
 })
