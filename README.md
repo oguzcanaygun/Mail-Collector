@@ -1,4 +1,4 @@
-# Mail-Collector
+# Newsletter
 LIVE:https://dry-citadel-14347.herokuapp.com/ <br>
 
 <img src="public/images/1.png"> <br>
